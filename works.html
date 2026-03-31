@@ -28,10 +28,12 @@ nav{max-width:1000px;margin:0 auto;padding:32px 0;display:flex;justify-content:s
 .section-title::after{content:'';display:block;width:60px;height:2px;background:#444;margin:12px auto 0}
 
 /* 滑动容器：居中布局 */
-.slider-container{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto}
-/* 确保轨道居中 */
+.slider-container{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto;
+  touch-action: pan-y;
+  user-select: none;
+}
 .slider-track-wrapper{display:flex;justify-content:center;width:100%;overflow:hidden}
-.slider-track{display:flex;align-items:center;gap:16px;width:max-content;transition:transform .3s ease}
+.slider-track{display:flex;align-items:center;gap:16px;width:max-content;transition:transform 0.3s ease-out;}
 
 /* 视频卡片：中间大、两边渐小 */
 .video-card{width:280px;flex-shrink:0;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .3s ease;position:relative;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
@@ -53,9 +55,12 @@ nav{max-width:1000px;margin:0 auto;padding:32px 0;display:flex;justify-content:s
 @keyframes blink{0%{opacity:.3}100%{opacity:1}}
 
 /* 平面设计滑动：居中布局 */
-.design-slider{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto}
+.design-slider{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto;
+  touch-action: pan-y;
+  user-select: none;
+}
 .design-track-wrapper{display:flex;justify-content:center;width:100%;overflow:hidden}
-.design-track{display:flex;gap:14px;width:max-content}
+.design-track{display:flex;gap:14px;width:max-content;transition:transform 0.3s ease-out;}
 .design-card{width:240px;flex-shrink:0;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .3s, box-shadow .3s}
 .design-card img{width:100%;height:320px;object-fit:cover;background:#111;transition:opacity .3s}
 .design-card:hover{transform:scale(1.02);box-shadow:0 6px 16px rgba(0,0,0,0.4)}
@@ -72,10 +77,6 @@ nav{max-width:1000px;margin:0 auto;padding:32px 0;display:flex;justify-content:s
 .tag-group{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
 .tag{padding:10px 20px;border:1px solid #333;border-radius:30px;font-size:14px;background:#111;transition:all .3s}
 .tag:hover{background:#222;transform:translateY(-2px)}
-
-/* 联系（底部备用） */
-.contact{display:none;max-width:1000px;margin:0 auto 80px;text-align:center}
-.contact-info{color:#ccc;font-size:15px}
 
 /* 视频弹窗 */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.98);z-index:9999;align-items:center;justify-content:center}
@@ -143,47 +144,42 @@ nav{flex-direction:column;gap:16px;padding:20px 0}
 <div class="pdf-item"><a href="最后的课.pdf" target="_blank">📄 动画剧本</a></div>
 </div>
 
-<!-- 视频作品：居中循环滚动 + 渐小效果 -->
+<!-- 视频成果展示 -->
 <h2 class="section-title" id="video">视频成果展示</h2>
 <div class="slider-container">
 <div class="slide-tip left"></div>
 <div class="slide-tip right"></div>
 <div class="slider-track-wrapper">
   <div class="slider-track" id="videoSlider">
-    <!-- 复制首几个元素实现无缝循环 -->
-    <div class="video-card" onclick="play('2026-剪辑-20s安利-第三种吻痕.mp4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
-    <div class="video-card" onclick="play('2024-拍摄-香积寺宣传.mp4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
-    <div class="video-card" onclick="play('2025-AIGC全个人制作动画-.mp4')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
-    <!-- 原始内容 -->
-    <div class="video-card" onclick="play('第一集全片-已做好字幕.mp4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
-    <div class="video-card" onclick="play('第二集-已去字幕_1.mp4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
-    <div class="video-card" onclick="play('2026-剪辑-混剪-演唱会总结混剪（游京）.mp4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
-    <div class="video-card" onclick="play('2025-剪辑-临江仙-仙儿风-可爱风.mp4')"><img src="临江仙封面.png"><div class="video-info">临江仙</div></div>
-    <div class="video-card" onclick="play('2026-剪辑-20s安利-春晚彩排物料（雨下一整夜）.mp4')"><img src="春晚封面.png"><div class="video-info">春晚物料</div></div>
-    <div class="video-card" onclick="play('2026-剪辑-20s安利-第三种吻痕.mp4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
-    <div class="video-card" onclick="play('2024-拍摄-香积寺宣传.mp4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
-    <div class="video-card" onclick="play('2025-AIGC全个人制作动画-.mp4')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
-    <div class="video-card" onclick="play('2025-剪辑-预告片-深海异种（AI电影）预告_2.mp4')"><img src="深海异种封面.png"><div class="video-info">深海预告</div></div>
-    <div class="video-card" onclick="play('敖特尔.mp4')"><img src="敖特尔.png"><div class="video-info">AIGC短片</div></div>
-    <!-- 复制前几个元素实现无缝循环 -->
-    <div class="video-card" onclick="play('第一集全片-已做好字幕.mp4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
-    <div class="video-card" onclick="play('第二集-已去字幕_1.mp4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
-    <div class="video-card" onclick="play('2026-剪辑-混剪-演唱会总结混剪（游京）.mp4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbEvG/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbE3f/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
+    <div class="video-card" onclick="play('https://streamable.com/y39mvq')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1QcX6BbEKa/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1DcX6BbECi/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbEG8/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1tNX6BdEzp/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="临江仙封面.png"><div class="video-info">临江仙</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV18cX6BbE1p/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="春晚封面.png"><div class="video-info">春晚物料</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbEvG/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbE3f/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1tNX6BdEzV/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbEMn/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="深海异种封面.png"><div class="video-info">深海预告</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1DcX6BbELW/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="敖特尔.png"><div class="video-info">AIGC短片</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1QcX6BbEKa/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1DcX6BbECi/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('https://www.bilibili.com/video/BV1hcX6BbEG8/?vd_source=491e7155c9e410e5c4d3403988026fb4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
   </div>
 </div>
 </div>
 
-<!-- 平面设计（居中循环滚动 + 点击查看原图）-->
+<!-- 平面设计作品 -->
 <h2 class="section-title" id="design">平面设计作品</h2>
 <div class="design-slider">
 <div class="slide-tip left"></div>
 <div class="slide-tip right"></div>
 <div class="design-track-wrapper">
   <div class="design-track" id="designSlider">
-    <!-- 复制首几个元素实现无缝循环 -->
     <div class="design-card" onclick="openImage('烽火-4.png')"><img src="烽火-4.png"></div>
     <div class="design-card" onclick="openImage('城市平方.png')"><img src="城市平方.png"></div>
-    <!-- 原始内容 -->
     <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼.png')"><img src="宣传海报·茶的第久久次淬炼.png"></div>
     <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-2.png')"><img src="宣传海报·茶的第久久次淬炼-2.png"></div>
     <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-3.png')"><img src="宣传海报·茶的第久久次淬炼-3.png"></div>
@@ -197,7 +193,6 @@ nav{flex-direction:column;gap:16px;padding:20px 0}
     <div class="design-card" onclick="openImage('9.png')"><img src="9.png"></div>
     <div class="design-card" onclick="openImage('烽火-4.png')"><img src="烽火-4.png"></div>
     <div class="design-card" onclick="openImage('城市平方.png')"><img src="城市平方.png"></div>
-    <!-- 复制前几个元素实现无缝循环 -->
     <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼.png')"><img src="宣传海报·茶的第久久次淬炼.png"></div>
     <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-2.png')"><img src="宣传海报·茶的第久久次淬炼-2.png"></div>
   </div>
@@ -245,14 +240,38 @@ nav{flex-direction:column;gap:16px;padding:20px 0}
 const modal = document.getElementById("modal");
 const player = document.getElementById("player");
 function play(src){
-  player.src=src;
+  // 处理B站链接，替换为可嵌入的视频地址（B站视频需使用iframe播放，此处调整播放逻辑）
+  if(src.includes('bilibili.com')){
+    // 提取BV号
+    const bvMatch = src.match(/BV\w+/);
+    if(bvMatch){
+      const bv = bvMatch[0];
+      // 创建iframe替代video标签播放B站视频
+      const modalContent = document.querySelector('.modal-content');
+      modalContent.innerHTML = `
+        <span class="close" onclick="closePlayer()">×</span>
+        <iframe src="https://player.bilibili.com/player.html?bvid=${bv}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;height:450px;border-radius:8px;"></iframe>
+      `;
+    }
+  }else{
+    player.src=src;
+    modalContent.innerHTML = `
+      <span class="close" onclick="closePlayer()">×</span>
+      <video id="player" controls style="width:100%;border-radius:8px;"></video>
+    `;
+    document.getElementById('player').src = src;
+  }
   modal.style.display="flex";
   document.body.style.overflow="hidden"
 }
 function closePlayer(){
   modal.style.display="none";
-  player.pause();
-  player.src="";
+  // 重置modal内容为原始video标签
+  const modalContent = document.querySelector('.modal-content');
+  modalContent.innerHTML = `
+    <span class="close" onclick="closePlayer()">×</span>
+    <video id="player" controls></video>
+  `;
   document.body.style.overflow="auto"
 }
 
@@ -275,33 +294,58 @@ window.onclick = function(e) {
   if (e.target == imageModal) closeImage();
 }
 
-// 视频无限横向滑动（居中循环）
-const slider = document.getElementById("videoSlider");
-const sliderWidth = slider.scrollWidth / 3; // 取1/3作为循环点
-let pos=0;
-function autoSlide(){
-  pos-=2;
-  // 无缝循环：当滚动到复制的元素位置时重置
-  if(Math.abs(pos) > sliderWidth){
-    pos = -sliderWidth / 3;
-  }
-  slider.style.transform=`translateX(${pos}px)`;
-}
-setInterval(autoSlide,30)
+// ==============================================
+// 核心功能：自动滚动 + 手动滑动 双模式
+// ==============================================
+function createAutoSwipeSlider(el, autoSpeed = 1.2, dragSpeed = 1.5) {
+  let isDragging = false;
+  let startX, currentTranslate = 0;
+  let animationFrame;
 
-// 平面设计横向滑动（居中循环）
-const dSlider = document.getElementById("designSlider");
-const dSliderWidth = dSlider.scrollWidth / 3;
-let dPos=0;
-function autoDesign(){
-  dPos-=1.5;
-  if(Math.abs(dPos) > dSliderWidth){
-    dPos = -dSliderWidth / 3;
+  // 自动滚动
+  function autoScroll() {
+    if (!isDragging) {
+      currentTranslate -= autoSpeed;
+      const totalWidth = el.scrollWidth / 3;
+      if (Math.abs(currentTranslate) >= totalWidth) currentTranslate = 0;
+      el.style.transform = `translateX(${currentTranslate}px)`;
+    }
+    animationFrame = requestAnimationFrame(autoScroll);
   }
-  dSlider.style.transform=`translateX(${dPos}px)`;
+  autoScroll();
+
+  // 鼠标/触摸 拖动
+  el.addEventListener("mousedown", startDrag);
+  el.addEventListener("touchstart", (e) => startDrag(e.touches[0]), { passive: true });
+  document.addEventListener("mouseup", stopDrag);
+  document.addEventListener("touchend", stopDrag);
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("touchmove", (e) => drag(e.touches[0]), { passive: true });
+
+  function startDrag(e) {
+    isDragging = true;
+    startX = e.pageX - el.offsetLeft + currentTranslate;
+    el.style.transition = "none";
+  }
+
+  function stopDrag() {
+    isDragging = false;
+    el.style.transition = "transform 0.3s ease-out";
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    const x = e.pageX - el.offsetLeft;
+    currentTranslate = (x - startX) * dragSpeed;
+    el.style.transform = `translateX(${currentTranslate}px)`;
+  }
 }
-setInterval(autoDesign,40)
+
+// 启动视频滑块
+createAutoSwipeSlider(document.getElementById("videoSlider"), 1.3, 1.6);
+
+// 启动设计滑块
+createAutoSwipeSlider(document.getElementById("designSlider"), 0.9, 1.3);
 </script>
-
 </body>
 </html>
