@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高明莉 | 作品集</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#000;color:#fff;line-height:1.6;padding:0 12px}
+
+/* 导航 */
+nav{max-width:1000px;margin:0 auto;padding:32px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.logo{font-size:20px;font-weight:600}
+.nav-links a{margin-left:22px;text-decoration:none;color:#fff;font-size:15px}
+.nav-links a:hover{opacity:.7}
+
+/* 标题 & 联系方式 */
+.header-container{max-width:1000px;margin:0 auto;text-align:center;padding:40px 0}
+.about h1{font-size:36px;margin-bottom:16px;letter-spacing:1px}
+.about p{max-width:700px;margin:0 auto;color:#ccc;font-size:16px;margin-bottom:24px}
+.contact-header{max-width:700px;margin:0 auto;padding:20px;background:#111;border-radius:12px;border:1px solid #222}
+.contact-header .contact-info{color:#ccc;font-size:15px;line-height:1.8}
+.contact-header .contact-info p{margin:6px 0}
+.contact-header-title{font-size:18px;margin-bottom:12px;color:#fff;font-weight:500}
+
+/* 章节标题 */
+.section-title{max-width:1000px;margin:70px auto 30px;font-size:24px;font-weight:500;text-align:center;letter-spacing:.8px;position:relative}
+.section-title::after{content:'';display:block;width:60px;height:2px;background:#444;margin:12px auto 0}
+
+/* 滑动容器：居中布局 */
+.slider-container{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto}
+/* 确保轨道居中 */
+.slider-track-wrapper{display:flex;justify-content:center;width:100%;overflow:hidden}
+.slider-track{display:flex;align-items:center;gap:16px;width:max-content;transition:transform .3s ease}
+
+/* 视频卡片：中间大、两边渐小 */
+.video-card{width:280px;flex-shrink:0;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .3s ease;position:relative;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.video-card img{width:100%;height:160px;object-fit:cover;display:block;transition:opacity .3s}
+.video-card:hover img{opacity:.9}
+.video-info{padding:12px 0;text-align:center;font-size:14px;color:#ccc}
+
+/* 无限滑动缩放：中间最大、两边变小 */
+.slider-track .video-card:nth-child(1){transform:scale(.75);opacity:.6}
+.slider-track .video-card:nth-child(2){transform:scale(.85);opacity:.8}
+.slider-track .video-card:nth-child(3){transform:scale(1);opacity:1}
+.slider-track .video-card:nth-child(4){transform:scale(.85);opacity:.8}
+.slider-track .video-card:nth-child(5){transform:scale(.75);opacity:.6}
+
+/* 滑动提示左右小光点（呼吸闪烁） */
+.slide-tip{position:absolute;top:50%;transform:translateY(-50%);width:12px;height:12px;background:#fff;border-radius:50%;opacity:.7;animation:blink 1.8s infinite alternate}
+.slide-tip.left{left:20px}
+.slide-tip.right{right:20px}
+@keyframes blink{0%{opacity:.3}100%{opacity:1}}
+
+/* 平面设计滑动：居中布局 */
+.design-slider{position:relative;width:100%;overflow:hidden;padding:40px 0;max-width:1000px;margin:0 auto}
+.design-track-wrapper{display:flex;justify-content:center;width:100%;overflow:hidden}
+.design-track{display:flex;gap:14px;width:max-content}
+.design-card{width:240px;flex-shrink:0;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .3s, box-shadow .3s}
+.design-card img{width:100%;height:320px;object-fit:cover;background:#111;transition:opacity .3s}
+.design-card:hover{transform:scale(1.02);box-shadow:0 6px 16px rgba(0,0,0,0.4)}
+.design-card:hover img{opacity:.9}
+
+/* PDF */
+.pdf-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;max-width:1000px;margin:0 auto 60px}
+.pdf-item{width:180px;padding:20px;border:1px solid #222;border-radius:8px;text-align:center;transition:all .3s;background:#111}
+.pdf-item a{color:#fff;text-decoration:none;font-size:14px;display:block}
+.pdf-item:hover{background:#222;transform:translateY(-4px)}
+
+/* 技能 */
+.skills{max-width:1000px;margin:0 auto 80px;text-align:center}
+.tag-group{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+.tag{padding:10px 20px;border:1px solid #333;border-radius:30px;font-size:14px;background:#111;transition:all .3s}
+.tag:hover{background:#222;transform:translateY(-2px)}
+
+/* 联系（底部备用） */
+.contact{display:none;max-width:1000px;margin:0 auto 80px;text-align:center}
+.contact-info{color:#ccc;font-size:15px}
+
+/* 视频弹窗 */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.98);z-index:9999;align-items:center;justify-content:center}
+.modal-content{position:relative;width:90%;max-width:800px}
+video{width:100%;display:block;background:#000;border-radius:8px}
+.close{position:absolute;top:-50px;right:10px;font-size:36px;color:#fff;cursor:pointer;width:44px;height:44px;display:grid;place-items:center;transition:opacity .3s}
+.close:hover{opacity:.7}
+
+/* 平面设计原图查看弹窗 */
+.image-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.image-modal-content{max-width:90%;max-height:90%;position:relative}
+.image-modal-content img{max-width:100%;max-height:90vh;border-radius:8px}
+.close-image{position:absolute;top:-40px;right:0;font-size:36px;color:#fff;cursor:pointer;width:44px;height:44px;display:grid;place-items:center}
+
+/* 响应式 */
+@media(max-width:600px){
+nav{flex-direction:column;gap:16px;padding:20px 0}
+.nav-links a{margin:0 8px}
+.video-card{width:240px}
+.design-card{width:200px}
+.close{font-size:32px;top:-44px}
+.about h1{font-size:28px}
+.section-title{font-size:20px}
+.contact-header{padding:16px}
+.pdf-item{width:140px;padding:16px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 导航 -->
+<nav>
+<div class="logo">高明莉</div>
+<div class="nav-links">
+<a href="index.html">首页</a>
+<a href="#script">编剧策划</a>
+<a href="#video">视频作品</a>
+<a href="#design">平面设计</a>
+<a href="#ppt">PPT作品集</a>
+</div>
+</nav>
+
+<!-- 标题 + 联系方式（置顶） -->
+<section class="header-container about">
+<h1>创意作品集</h1>
+<p>编剧文字策划 | 视频拍摄与剪辑 | 人像摄影 | 平面设计 | PPT演示</p>
+<div class="contact-header">
+  <div class="contact-header-title">📮 联系方式</div>
+  <div class="contact-info">
+    <p>邮箱：2244038560@qq.com</p>
+    <p>微信：gmi1821989572</p>
+    <p>电话：19357393868</p>
+  </div>
+</div>
+</section>
+
+<!-- 编剧策划 -->
+<h2 class="section-title" id="script">编剧策划（PDF）</h2>
+<div class="pdf-grid">
+<div class="pdf-item"><a href="不妨酿成甜浆！（组稿中）.pdf" target="_blank">📄 小说策划</a></div>
+<div class="pdf-item"><a href="红姐与尾随者的故事前史（现实悬疑）.pdf" target="_blank">📄 悬疑剧本</a></div>
+<div class="pdf-item"><a href="当生活变成生活剧本.pdf" target="_blank">📄 生活剧本</a></div>
+<div class="pdf-item"><a href="镇国太子：废柴逆袭记 短剧剧本.pdf" target="_blank">📄 短剧剧本</a></div>
+<div class="pdf-item"><a href="最后的课.pdf" target="_blank">📄 动画剧本</a></div>
+</div>
+
+<!-- 视频作品：居中循环滚动 + 渐小效果 -->
+<h2 class="section-title" id="video">视频成果展示</h2>
+<div class="slider-container">
+<div class="slide-tip left"></div>
+<div class="slide-tip right"></div>
+<div class="slider-track-wrapper">
+  <div class="slider-track" id="videoSlider">
+    <!-- 复制首几个元素实现无缝循环 -->
+    <div class="video-card" onclick="play('2026-剪辑-20s安利-第三种吻痕.mp4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
+    <div class="video-card" onclick="play('2024-拍摄-香积寺宣传.mp4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
+    <div class="video-card" onclick="play('2025-AIGC全个人制作动画-.mp4')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
+    <!-- 原始内容 -->
+    <div class="video-card" onclick="play('第一集全片-已做好字幕.mp4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('第二集-已去字幕_1.mp4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('2026-剪辑-混剪-演唱会总结混剪（游京）.mp4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
+    <div class="video-card" onclick="play('2025-剪辑-临江仙-仙儿风-可爱风.mp4')"><img src="临江仙封面.png"><div class="video-info">临江仙</div></div>
+    <div class="video-card" onclick="play('2026-剪辑-20s安利-春晚彩排物料（雨下一整夜）.mp4')"><img src="春晚封面.png"><div class="video-info">春晚物料</div></div>
+    <div class="video-card" onclick="play('2026-剪辑-20s安利-第三种吻痕.mp4')"><img src="第三个吻痕封面.png"><div class="video-info">吻痕剪辑</div></div>
+    <div class="video-card" onclick="play('2024-拍摄-香积寺宣传.mp4')"><img src="香积寺封面.png"><div class="video-info">香积寺宣传</div></div>
+    <div class="video-card" onclick="play('2025-AIGC全个人制作动画-.mp4')"><img src="AIGC30秒短片.png"><div class="video-info">AIGC动画</div></div>
+    <div class="video-card" onclick="play('2025-剪辑-预告片-深海异种（AI电影）预告_2.mp4')"><img src="深海异种封面.png"><div class="video-info">深海预告</div></div>
+    <div class="video-card" onclick="play('敖特尔.mp4')"><img src="敖特尔.png"><div class="video-info">AIGC短片</div></div>
+    <!-- 复制前几个元素实现无缝循环 -->
+    <div class="video-card" onclick="play('第一集全片-已做好字幕.mp4')"><img src="AIGC漫剧1封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('第二集-已去字幕_1.mp4')"><img src="AIGC漫剧2封面.png"><div class="video-info">AIGC短剧</div></div>
+    <div class="video-card" onclick="play('2026-剪辑-混剪-演唱会总结混剪（游京）.mp4')"><img src="礐嶨封面.png"><div class="video-info">剪辑作品</div></div>
+  </div>
+</div>
+</div>
+
+<!-- 平面设计（居中循环滚动 + 点击查看原图）-->
+<h2 class="section-title" id="design">平面设计作品</h2>
+<div class="design-slider">
+<div class="slide-tip left"></div>
+<div class="slide-tip right"></div>
+<div class="design-track-wrapper">
+  <div class="design-track" id="designSlider">
+    <!-- 复制首几个元素实现无缝循环 -->
+    <div class="design-card" onclick="openImage('烽火-4.png')"><img src="烽火-4.png"></div>
+    <div class="design-card" onclick="openImage('城市平方.png')"><img src="城市平方.png"></div>
+    <!-- 原始内容 -->
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼.png')"><img src="宣传海报·茶的第久久次淬炼.png"></div>
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-2.png')"><img src="宣传海报·茶的第久久次淬炼-2.png"></div>
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-3.png')"><img src="宣传海报·茶的第久久次淬炼-3.png"></div>
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-22.png')"><img src="宣传海报·茶的第久久次淬炼-22.png"></div>
+    <div class="design-card" onclick="openImage('应援手幅示例.png')"><img src="应援手幅示例.png"></div>
+    <div class="design-card" onclick="openImage('眼周护理的咖啡哲学_画板 1.jpg')"><img src="眼周护理的咖啡哲学_画板 1.jpg"></div>
+    <div class="design-card" onclick="openImage('1.png')"><img src="1.png"></div>
+    <div class="design-card" onclick="openImage('3.png')"><img src="3.png"></div>
+    <div class="design-card" onclick="openImage('5.png')"><img src="5.png"></div>
+    <div class="design-card" onclick="openImage('7.png')"><img src="7.png"></div>
+    <div class="design-card" onclick="openImage('9.png')"><img src="9.png"></div>
+    <div class="design-card" onclick="openImage('烽火-4.png')"><img src="烽火-4.png"></div>
+    <div class="design-card" onclick="openImage('城市平方.png')"><img src="城市平方.png"></div>
+    <!-- 复制前几个元素实现无缝循环 -->
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼.png')"><img src="宣传海报·茶的第久久次淬炼.png"></div>
+    <div class="design-card" onclick="openImage('宣传海报·茶的第久久次淬炼-2.png')"><img src="宣传海报·茶的第久久次淬炼-2.png"></div>
+  </div>
+</div>
+</div>
+
+<!-- PPT作品集 -->
+<h2 class="section-title" id="ppt">PPT演示（PDF）</h2>
+<div class="pdf-grid">
+<div class="pdf-item"><a href="创意选择.pdf" target="_blank">📄 PPT 01</a></div>
+<div class="pdf-item"><a href="《茴莱》实验电影提案.pdf" target="_blank">📄 PPT 02</a></div>
+<div class="pdf-item"><a href="高明莉作品集（编剧策划与物料制作）-2026 - 副本.pdf" target="_blank">📄 PPT 03</a></div>
+</div>
+
+<!-- 技能 -->
+<div class="skills">
+<h2 class="section-title">技能标签</h2>
+<div class="tag-group">
+<span class="tag">编剧策划</span>
+<span class="tag">视频拍摄剪辑</span>
+<span class="tag">平面设计</span>
+<span class="tag">PPT制作</span>
+<span class="tag">品牌运营</span>
+</div>
+</div>
+
+<!-- 视频弹窗 -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="close" onclick="closePlayer()">×</span>
+<video id="player" controls></video>
+</div>
+</div>
+
+<!-- 平面设计原图查看弹窗 -->
+<div class="image-modal" id="imageModal">
+<div class="image-modal-content">
+  <span class="close-image" onclick="closeImage()">×</span>
+  <img id="previewImage" src="" alt="平面设计原图">
+</div>
+</div>
+
+<script>
+// 视频播放
+const modal = document.getElementById("modal");
+const player = document.getElementById("player");
+function play(src){
+  player.src=src;
+  modal.style.display="flex";
+  document.body.style.overflow="hidden"
+}
+function closePlayer(){
+  modal.style.display="none";
+  player.pause();
+  player.src="";
+  document.body.style.overflow="auto"
+}
+
+// 平面设计原图查看
+const imageModal = document.getElementById("imageModal");
+const previewImage = document.getElementById("previewImage");
+function openImage(src){
+  previewImage.src = src;
+  imageModal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+function closeImage(){
+  imageModal.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+// 点击空白处关闭弹窗
+window.onclick = function(e) {
+  if (e.target == modal) closePlayer();
+  if (e.target == imageModal) closeImage();
+}
+
+// 视频无限横向滑动（居中循环）
+const slider = document.getElementById("videoSlider");
+const sliderWidth = slider.scrollWidth / 3; // 取1/3作为循环点
+let pos=0;
+function autoSlide(){
+  pos-=2;
+  // 无缝循环：当滚动到复制的元素位置时重置
+  if(Math.abs(pos) > sliderWidth){
+    pos = -sliderWidth / 3;
+  }
+  slider.style.transform=`translateX(${pos}px)`;
+}
+setInterval(autoSlide,30)
+
+// 平面设计横向滑动（居中循环）
+const dSlider = document.getElementById("designSlider");
+const dSliderWidth = dSlider.scrollWidth / 3;
+let dPos=0;
+function autoDesign(){
+  dPos-=1.5;
+  if(Math.abs(dPos) > dSliderWidth){
+    dPos = -dSliderWidth / 3;
+  }
+  dSlider.style.transform=`translateX(${dPos}px)`;
+}
+setInterval(autoDesign,40)
+</script>
+
+</body>
+</html>
